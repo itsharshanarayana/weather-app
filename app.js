@@ -5,5 +5,6 @@ request({
   json: true
 }, (error, response, body) => {
   // console.log(JSON.stringify(body, undefined, 2));
+  // Using template strings, print formatted address.
   console.log(`Address: ${body.results[0].formatted_address}`);
 });
