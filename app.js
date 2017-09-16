@@ -19,4 +19,4 @@ const argv = yargs
   .argv;
 
 
-geocode.geocodeAddress(yargs.argv.a);
+geocode.geocodeAddress(argv.a);
