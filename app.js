@@ -19,4 +19,4 @@ const argv = yargs
   .argv;
 
 // Call geocodeAddress function from geocode module
-geocode.geocodeAddress(argv.a);
+geocode.geocodeAddress(argv.address);
