@@ -6,8 +6,7 @@ const request = require('request');
 // Variable/Constants declarations
 const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
-
-
+// Function declaration - geocodeAddress
 var geocodeAddress = (raw_address) => {
   console.log('Raw Address: '+ raw_address);
   const url = baseURL + encodeURIComponent(raw_address);
@@ -15,7 +14,7 @@ var geocodeAddress = (raw_address) => {
 
   // Result to be passed to the calling routine
   var my_result = {};
-  
+
   request({
     url,
     json: true
