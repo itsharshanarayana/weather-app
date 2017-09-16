@@ -7,6 +7,11 @@ const request = require('request');
 const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
 // Function declaration - geocodeAddress
+/*
+  Takes two input parameters - raw address and callback function.
+  Raw address is encoded and used for calling geocode api call.
+  Once the api call returns, corresponding values are set in call back arguments.
+*/
 var geocodeAddress = (raw_address, callback) => {
   const url = baseURL + encodeURIComponent(raw_address);
 
@@ -31,11 +36,8 @@ var geocodeAddress = (raw_address, callback) => {
         latitude: body.results[0].geometry.location.lat,
         longitude: body.results[0].geometry.location.lng
       });
-
     }
-
   });
-
 }; // End of geocodeAddress
 
 // Expose function geocodeAddress so that it is visible to the calling modules
