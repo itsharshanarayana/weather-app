@@ -44,16 +44,23 @@ request({
   // console.log(`Address: ${body.results[0].formatted_address}`);
   // Getting location object which contains lattitude and longitude of the
   // location.
-  var location = JSON.stringify(body.results[0].geometry.location, undefined, 2);
+  // var location = JSON.stringify(body.results[0].geometry.location, undefined, 2);
   // console.log(`Location: ${location}`);
   // Getting latitude for the location.
-  console.log(`Lattitude: ${body.results[0].geometry.location.lat}`);
-  // Getting longitude for the location.
-  console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+  if(error){
+    console.log('Unable to connect to Google Geocode API servers');
+  } else if('ZERO_RESULTS' === body.status){
+    console.log('Invalid address. Please correct the address');
+  } else if('OK' === body.status){
+    console.log('\nAddress details:');
+    console.log(`Lattitude: ${body.results[0].geometry.location.lat}`);
+    // Getting longitude for the location.
+    console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
 
-  console.log(`Response Status Code: ${response.statusCode}`);
+    // console.log(`Response Status Code: ${response.statusCode}`);
+    // console.log('Status Code: ' + response.statusCode);
+    // console.log(JSON.stringify(response.request.uri.href,undefined, 2));
+    console.log('Response status: ' + body.status);
+  }
 
-  console.log('Status Code: ' + response.statusCode);
-
-  console.log(JSON.stringify(response.request.uri.href,undefined, 2));
 });
