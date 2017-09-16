@@ -7,10 +7,8 @@ const request = require('request');
 const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
 // Function declaration - geocodeAddress
-var geocodeAddress = (raw_address) => {
-  console.log('Raw Address: '+ raw_address);
+var geocodeAddress = (raw_address, callback) => {
   const url = baseURL + encodeURIComponent(raw_address);
-  console.log('Complete URI: ' + url);
 
   // Result to be passed to the calling routine
   var my_result = {};
@@ -22,15 +20,18 @@ var geocodeAddress = (raw_address) => {
   }, (error, response, body) => {
 
     if(error){
-      console.log('Unable to connect to Google Geocode API servers');
+      // console.log('Unable to connect to Google Geocode API servers');
+      callback('Unable to connect to Google Geocode API servers');
     } else if('ZERO_RESULTS' === body.status){
-      console.log('Invalid address. Please correct the address');
+      // console.log('Invalid address. Please correct the address');
+      callback('Invalid address. Please correct the address');
     } else if('OK' === body.status){
-      my_result.complete_address = body.results[0].formatted_address;
-      my_result.latitude = body.results[0].geometry.location.lat;
-      my_result.longitude = body.results[0].geometry.location.lng;
+      callback(undefined, {
+        address: body.results[0].formatted_address,
+        latitude: body.results[0].geometry.location.lat,
+        longitude: body.results[0].geometry.location.lng
+      });
 
-      console.log('Result Object: ' + JSON.stringify(my_result, undefined, 2));
     }
 
   });

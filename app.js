@@ -19,4 +19,10 @@ const argv = yargs
   .argv;
 
 // Call geocodeAddress function from geocode module
-geocode.geocodeAddress(argv.address);
+geocode.geocodeAddress(argv.address, (errorMessage, results) => {
+  if(errorMessage){
+    console.log(errorMessage);
+  } else{
+    console.log("Result: " + JSON.stringify(results, undefined, 2));
+  }
+});
