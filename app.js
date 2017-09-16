@@ -20,5 +20,5 @@ request({
 
   console.log('Status Code: ' + response.statusCode);
 
-  console.log('Request: ' + JSON.stringify(response.request.uri.href,undefined, 2));
+  console.log(JSON.stringify(response.request.uri.href,undefined, 2));
 });
