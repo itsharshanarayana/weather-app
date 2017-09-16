@@ -19,11 +19,4 @@ const argv = yargs
   .argv;
 
 
-// var location = geocode.geocodeAddress(yargs.argv.a);
-
 geocode.geocodeAddress(yargs.argv.a);
-
-
-// console.log('Location Object Returned: ' + JSON.stringify(location, undefined, 2));
-// console.log('Latitude: ' + location.lat);
-// console.log('Longitude: ' + location.lng);
