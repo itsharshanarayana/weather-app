@@ -15,6 +15,7 @@ var geocodeAddress = (raw_address) => {
   // Result to be passed to the calling routine
   var my_result = {};
 
+  // Call to google geocode apis
   request({
     url,
     json: true
