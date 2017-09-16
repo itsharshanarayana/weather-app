@@ -15,4 +15,10 @@ request({
   console.log(`Lattitude: ${body.results[0].geometry.location.lat}`);
   // Getting longitude for the location.
   console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
+
+  console.log(`Response Status Code: ${response.statusCode}`);
+
+  console.log('Status Code: ' + response.statusCode);
+
+  console.log('Request: ' + JSON.stringify(response.request.uri.href,undefined, 2));
 });
