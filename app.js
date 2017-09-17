@@ -36,5 +36,3 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
     });
   }
 });
-
-// console.log('Before calling: Latitude: ' + latitude + ', Longitude: ' + longitude);
