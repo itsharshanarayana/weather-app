@@ -30,6 +30,7 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
         console.log(fc_errorMessage);
       }else{
         console.log('Location and temperature details:');
+        console.log(`Location: ${results.address}`);
         console.log(`Latitude: ${fc_results.latitude}, Longitude: ${fc_results.longitude}`);
         console.log(`Temperature: ${fc_results.temperature}, ApparentTemperature: ${fc_results.apparentTemperature}`);
       }
