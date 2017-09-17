@@ -55,9 +55,9 @@ var getCurrentTemperatureDetails = (latitude, longitude, callback) => {
   }, (error, response, body) => {
     if(error){
       callback('Unable to connect to Forecast API servers');
-    } else if('ZERO_RESULTS' === body.status){
-      callback('Invalid address. Please correct the address');
-    } else {
+    } else if (response.statucCode === 400){
+      callback('Unable to fetch weather');
+    } else if (response.statusCode === 200){
       callback(undefined, {
         latitude,
         longitude,
