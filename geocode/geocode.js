@@ -4,7 +4,7 @@ const request = require('request');
 // Import custom modules
 
 // Variable/Constants declarations
-const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+
 
 // Function declaration - geocodeAddress
 /*
@@ -13,6 +13,8 @@ const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   Once the api call returns, corresponding values are set in call back arguments.
 */
 var geocodeAddress = (raw_address, callback) => {
+  const baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+
   const url = baseURL + encodeURIComponent(raw_address);
 
   // Result to be passed to the calling routine
@@ -40,7 +42,36 @@ var geocodeAddress = (raw_address, callback) => {
   });
 }; // End of geocodeAddress
 
+var getCurrentTemperatureDetails = (latitude, longitude, callback) => {
+  // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  const baseURL = 'https://api.forecast.io/forecast/';
+  const apiKey = 'ea91b1962da0879bc282db72a8b918fa';
+  const url = baseURL + apiKey + '/' + latitude + ',' + longitude;
+
+  // console.log('Complete Forecast URL: ' + url);
+  request({
+    url,
+    json: true
+  }, (error, response, body) => {
+    if(error){
+      callback('Unable to connect to Forecast API servers');
+    } else if('ZERO_RESULTS' === body.status){
+      callback('Invalid address. Please correct the address');
+    } else {
+      callback(undefined, {
+        latitude,
+        longitude,
+        temperature: body.currently.temperature,
+        apparentTemperature: body.currently.apparentTemperature
+      });
+    }
+  });
+}
+
 // Expose function geocodeAddress so that it is visible to the calling modules
 module.exports = {
-  geocodeAddress
+  geocodeAddress,
+  getCurrentTemperatureDetails
 };
+
+// forecast io api key = ea91b1962da0879bc282db72a8b918fa
