@@ -3,6 +3,7 @@ const yargs = require('yargs');
 
 // Import custom modules
 const geocode = require('./geocode/geocode.js');
+const weather = require('./weather/weather.js');
 
 // Variables/Constant declarations
 const argv = yargs
@@ -24,7 +25,7 @@ geocode.geocodeAddress(argv.address, (errorMessage, results) => {
     console.log(errorMessage);
   } else{
     // Get current temperature of the location
-    geocode.getCurrentTemperatureDetails(results.latitude, results.longitude, (fc_errorMessage, fc_results) => {
+    weather.getCurrentTemperatureDetails(results.latitude, results.longitude, (fc_errorMessage, fc_results) => {
       if(fc_errorMessage){
         console.log(fc_errorMessage);
       }else{
